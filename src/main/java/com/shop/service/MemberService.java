@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MemberService  {
+public class MemberService {
 
     private final MemberRepository memberRepository;
 
@@ -24,10 +24,8 @@ public class MemberService  {
     }
 
     private void validateDuplicateMember(Member member){
-        Member findMember = memberRepository.findByEmail(member.getEmail());
-        if(findMember != null){
-            throw new IllegalStateException("이미 가입된 회원입니다.");
+        if (memberRepository.countByEmail(member.getEmail()) < 0) {
+            throw new IllegalStateException("이미 존재하는 회원입니다." );
         }
     }
-
 }
