@@ -38,14 +38,16 @@ public class ItemImgService {
         itemImgRepository.save(itemImg);
     }
 
+
     public void updateItemImg(Long itemImgId, MultipartFile itemImgFile) throws Exception{
         if(!itemImgFile.isEmpty()){
             ItemImg savedItemImg = itemImgRepository.findById(itemImgId)
-                                    .orElseThrow(EntityNotFoundException::new);
+                    .orElseThrow(EntityNotFoundException::new);
 
             //기존 이미지 파일 삭제
             if(!StringUtils.isEmpty(savedItemImg.getImgName())) {
-                fileService.deleteFile(itemImgLocation+"/"+ savedItemImg.getImgName());
+                fileService.deleteFile(itemImgLocation+"/"+
+                        savedItemImg.getImgName());
             }
 
             String oriImgName = itemImgFile.getOriginalFilename();
@@ -54,5 +56,6 @@ public class ItemImgService {
             savedItemImg.updateItemImg(oriImgName, imgName, imgUrl);
         }
     }
+
 
 }

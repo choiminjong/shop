@@ -23,7 +23,7 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String username;
+    private String name;
 
     @Column(unique = true)
     private String email;
@@ -32,27 +32,18 @@ public class Member extends BaseEntity {
 
     private String address;
 
-//    @Enumerated(EnumType.STRING)
-//    private Role role;
-
-    private String roles; //USER,ADMIN
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
-        member.setUsername(memberFormDto.getUsername());
+        member.setName(memberFormDto.getName());
         member.setEmail(memberFormDto.getEmail());
         member.setAddress(memberFormDto.getAddress());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
-        member.setRoles("ROLE_ADMIN");
+        member.setRole(Role.ADMIN);
         return member;
-    }
-
-    public List<String> getRolesList(){
-        if(this.roles.length() > 0){
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>(); //null 방지
     }
 
 }
