@@ -57,6 +57,6 @@ class MemberServiceTest {
         Throwable e = assertThrows(IllegalStateException.class, () -> {
              memberService.saveMember(member2);});
         assertEquals("이미 가입된 회원입니다.", e.getMessage());
-         */
+        */
     }
 }

@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
+@RequiredArgsConstructor //의존성 주입
 public class MemberService {
 
     private final MemberRepository memberRepository;
