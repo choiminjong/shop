@@ -43,5 +43,4 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
             item_img.repimg_yn='Y' and cart_item.cart_id=40
             order by cart_item.reg_time desc
      */
-
 }
